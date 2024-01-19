@@ -3,6 +3,7 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
+import AcademicSemester from "../pages/admin/academicManagement/academicSemester";
 // import { NavLink } from "react-router-dom";
 
 // type TRoute = {
@@ -40,6 +41,26 @@ export const adminPaths = [
                 path: "create-student",
                 element: <CreateStudent/>
             },
+        ]
+    },
+    {
+        name: "Academic Management",
+        children: [
+            {
+                name: "Academic Semesters",
+                path: "academic-semesters",
+                element: <AcademicSemester/>
+            },
+            // {
+            //     name: "Create Faculty",
+            //     path: "create-faculty",
+            //     element: <CreateFaculty/>
+            // },
+            // {
+            //     name: "Create Student",
+            //     path: "create-student",
+            //     element: <CreateStudent/>
+            // },
         ]
     },
 ]

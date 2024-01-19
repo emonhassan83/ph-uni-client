@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "antd";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
-import { setUser } from "../redux/features/auth/authSlice";
+import { TUser, setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Login = () => {
   const { register, handleSubmit } = useForm({
@@ -12,20 +15,32 @@ const Login = () => {
       password: "admin123",
     },
   });
-  const [login, { error }] = useLoginMutation();
+  const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const onSubmit = async (data) => {
-    const userInfo = {
-      id: data.userId,
-      password: data.password,
-    };
+  const onSubmit = async (data: FieldValues) => {
+    const toastId = toast.loading("Logging In");
 
-    // ? User login functionality here
-    const res = await login(userInfo).unwrap();
-    const user = verifyToken(res.data.accessToken);
-    
-    dispatch(setUser({ user: user, token: res.data.accessToken }));
+    try {
+      const userInfo = {
+        id: data.userId,
+        password: data.password,
+      };
+
+      // ? User login functionality here
+      const res = await login(userInfo).unwrap();
+      const user = verifyToken(res.data.accessToken) as TUser;
+
+      dispatch(setUser({ user: user, token: res.data.accessToken }));
+
+      // ? Navigate user after login
+      navigate(`/${user.role}/dashboard`);
+
+      toast.success("User logged in", { id: toastId, duration: 2000 });
+    } catch (error: any) {
+      toast.error(error.message, { id: toastId, duration: 2000 });
+    }
   };
 
   return (

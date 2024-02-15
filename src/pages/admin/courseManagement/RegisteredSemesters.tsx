@@ -3,7 +3,7 @@ import type { TableColumnsType, TableProps } from "antd";
 import { useState } from "react";
 import { TQueryParam } from "../../../types";
 import { TSemester } from "../../../types/courseManagement.type";
-import { useGetAllRegisteredSemestersQuery, useUpdateRegisteredSemesterMutation } from "../../../redux/features/admin/courseManagement";
+import { useGetAllRegisteredSemestersQuery, useUpdateRegisteredSemesterMutation } from "../../../redux/features/admin/courseManagementApi";
 import moment from "moment";
 
 export type TTableData = Pick<TSemester, "startDate" | "endDate" | "status">;

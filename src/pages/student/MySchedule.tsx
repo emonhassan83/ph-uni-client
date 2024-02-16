@@ -5,14 +5,14 @@ const MySchedule = () => {
 
   return (
     <div>
-      {enrolledCourses?.data?.map((item: any) => {
+      {enrolledCourses?.data?.map((item: any, index: string) => {
         return (
-          <div>
+          <div key={index}>
             <div>{item.course.title}</div>
             <div>{item.offeredCourse.section}</div>
             <div>
-              {item.offeredCourse.days.map((item: any) => (
-                <span> {item}</span>
+              {item.offeredCourse.days.map((item: any, index: string) => (
+                <span key={index}> {item}</span>
               ))}
             </div>
           </div>

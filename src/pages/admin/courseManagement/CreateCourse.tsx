@@ -34,9 +34,7 @@ const CreateCourse = () => {
           }))
         : [],
     };
-    console.log(courseData);
     
-
     try {
       //* Create academic semester to send data
       const res = (await createCourse(courseData)) as TResponse<any>;

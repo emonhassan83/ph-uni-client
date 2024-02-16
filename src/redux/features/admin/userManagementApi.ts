@@ -39,8 +39,8 @@ const userManagementApi = baseApi.injectEndpoints({
         }
 
         return {
-          url: '/faculties',
-          method: 'GET',
+          url: "/faculties",
+          method: "GET",
           params: params,
         };
       },
@@ -59,7 +59,20 @@ const userManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: "/auth/change-password",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllStudentsQuery ,useAddStudentMutation, useGetAllFacultiesQuery, } = userManagementApi;
+export const {
+  useGetAllStudentsQuery,
+  useAddStudentMutation,
+  useGetAllFacultiesQuery,
+  useChangePasswordMutation,
+} = userManagementApi;

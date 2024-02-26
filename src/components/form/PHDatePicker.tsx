@@ -12,9 +12,9 @@ const PHDatePiker = ({ name, label }: TDatePikerProps) => {
       <Controller
         name={name}
         render={({ field }) => (
-        <Form.Item label={label}>
-        <DatePicker {...field} size="large" style={{width: "100%"}} />
-        </Form.Item>
+          <Form.Item label={label}>
+            <DatePicker {...field} size="large" style={{ width: "100%" }} />
+          </Form.Item>
         )}
       />
     </div>

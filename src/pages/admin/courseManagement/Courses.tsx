@@ -7,7 +7,6 @@ import { useGetAllFacultiesQuery } from '../../../redux/features/admin/userManag
 
 const Courses = () => {
   // const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
-
   const { data: courses, isFetching } = useGetAllCoursesQuery(undefined);
 
   const tableData = courses?.data?.map(({ _id, title, prefix, code }) => ({
@@ -30,7 +29,7 @@ const Courses = () => {
     {
       title: 'Action',
       key: 'x',
-      render: (item) => {
+      render: (item: any) => {
         return <AddFacultyModal facultyInfo={item} />;
       },
     },
@@ -59,7 +58,7 @@ const Courses = () => {
 };
 
 //* Use antd design modal for assign faculty
-const AddFacultyModal = ({ facultyInfo }) => {
+const AddFacultyModal = ({ facultyInfo }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: facultiesData } = useGetAllFacultiesQuery(undefined);
   const [addFaculties] = useAddFacultiesMutation();
@@ -69,7 +68,7 @@ const AddFacultyModal = ({ facultyInfo }) => {
     label: item.fullName,
   }));
 
-  const handleSubmit = (data) => {
+  const handleSubmit = (data: any) => {
     const facultyData = {
       courseId: facultyInfo.key,
       data,
